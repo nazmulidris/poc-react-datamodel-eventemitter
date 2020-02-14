@@ -46,7 +46,7 @@ class DataModel {
     setUser(user) {
         this.user = user;
         localStorage.setItem(USER_KEY, JSON.stringify(user));
-        // Send --> 🐣
+        // emitter[SignIn].Send --> 🐣
         this.eventEmitter.emit(EVENTS.SIGN_IN, user);
     }
 

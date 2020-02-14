@@ -47,8 +47,8 @@ class Auth extends React.Component {
         firebaseAuth.signOut();
     }
 
-    // Receive --> 🐣
     componentDidMount() {
+        // emitter[SignIn].Receive --> 🐣
         dataModel.eventEmitter.on(EVENTS.SIGN_IN, (user) => {
             console.log(user);
             if (user) {

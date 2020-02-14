@@ -1,0 +1,1 @@
+Copied from this [tutorial](https://medium.com/javascript-in-plain-english/create-a-react-application-from-the-scracth-using-webpack-babel-and-react-79a7913c8f61)

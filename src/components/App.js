@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Nazmul Idris. All rights reserved.
+ * Copyright 2020 Maret Idris. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,8 +15,17 @@
  */
 
 import React from "react";
-import {render} from "react-dom";
-import "./index.css";
-import App from "./components/App";
+import Auth from "./Auth";
 
-render(<App/>, document.getElementById("app"));
+class App extends React.Component {
+    render() {
+        return (
+            <div>
+                <h1>Hello World</h1>
+                <Auth/>
+            </div>
+        );
+    }
+}
+
+export default App;

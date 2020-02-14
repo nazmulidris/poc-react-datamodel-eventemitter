@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Nazmul Idris. All rights reserved.
+ * Copyright 2020 Maret Idris. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,8 +15,19 @@
  */
 
 import React from "react";
-import {render} from "react-dom";
-import "./index.css";
-import App from "./components/App";
+import AvatarIcon from '../images/avatar.svg';
 
-render(<App/>, document.getElementById("app"));
+class Auth extends React.Component {
+    render() {
+        return(
+            <div>
+                <button>Sign in with Google</button>
+                <button>Sign out</button>
+                <h3>Username</h3>
+                <img src={AvatarIcon} alt="user icon"/>
+            </div>
+        );
+    }
+}
+
+export default Auth;

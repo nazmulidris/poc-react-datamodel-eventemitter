@@ -16,17 +16,26 @@
 
 import React from "react";
 import AvatarIcon from '../images/avatar.svg';
+import {firebaseAuth} from "../context/FirebaseAuth";
 
 class Auth extends React.Component {
     render() {
-        return(
+        return (
             <div>
-                <button>Sign in with Google</button>
-                <button>Sign out</button>
+                <button onClick={this.onSignIn}>Sign in with Google</button>
+                <button onClick={this.onSignOut}>Sign out</button>
                 <h3>Username</h3>
                 <img src={AvatarIcon} alt="user icon"/>
             </div>
         );
+    }
+
+    onSignIn() {
+        firebaseAuth.signIn();
+    }
+
+    onSignOut() {
+        firebaseAuth.signOut();
     }
 }
 

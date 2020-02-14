@@ -48,7 +48,7 @@ class FirebaseAuth {
     };
 
     signOut() {
-        console.log("Signed out!🐣");
+        console.log("Signed out!");
         this.firebaseAuth.signOut().then(() => {
             dataModel.setUser(null);
         });

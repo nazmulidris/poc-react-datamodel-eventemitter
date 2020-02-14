@@ -55,7 +55,9 @@ class FirebaseAuth {
     }
     
     init() {
-        console.log("🏁 dataModel has been created");
+        console.log("🏁 firebaseAuth has been created");
+        
+        
     }
 }
 

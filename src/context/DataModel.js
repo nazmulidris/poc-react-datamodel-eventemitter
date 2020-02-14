@@ -34,31 +34,27 @@ class DataModel {
     this.eventEmitter  = new EventEmitter();
   }
   
-  // getUser() {
-  //   return this.user;
-  // }
-  //
-  // getData() {
-  //   return this.data;
-  // }
+  getUser = () => {
+    return this.user;
+  }
+  
+  getData = () => {
+    return this.data;
+  }
   
   // Save user object to localStorage from memory.
-  setUser = (user) => {
+  setUser = user => {
     this.user = user;
     localStorage.setItem(USER_KEY, JSON.stringify(user));
     // emitter[SignIn].Send --> 🐣
     this.eventEmitter.emit(EVENTS.SIGN_IN, user);
-  };
   
   // Save data object to localStorage from memory.
-  setData = (data) => {
+  setData = data => {
     this.data = data;
     localStorage.setItem(DATA_KEY, JSON.stringify(data));
-  };
   
-  init = () => {
     console.log("🏁 dataModel has been created");
-  };
 }
 
 const dataModel = new DataModel();

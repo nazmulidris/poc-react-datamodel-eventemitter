@@ -14,50 +14,58 @@
  * limitations under the License.
  */
 
-import React from "react";
-import AvatarIcon from '../images/avatar.svg';
-import {firebaseAuth} from "../context/FirebaseAuth";
+import React               from "react";
+import AvatarIcon          from '../images/avatar.svg';
+import {firebaseAuth}      from "../context/FirebaseAuth";
 import {dataModel, EVENTS} from "../context/DataModel";
 
 class Auth extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            name: "Username",
-            avatar: AvatarIcon
-        };
+  constructor(props) {
+    super(props);
+    this.state = {
+      name  : "Username",
+      avatar: AvatarIcon
+    };
+  }
+  
+  render() {
+    return (
+        <div>
+          <button onClick={this.onSignIn}>Sign in with Google</button>
+          <button onClick={this.onSignOut}>Sign out</button>
+          <h3>{this.state.name}</h3>
+          <img src={this.state.avatar} alt="user icon"/>
+        </div>
+    );
+  }
+  
+  onSignIn() {
+    firebaseAuth.signIn();
+  }
+  
+  onSignOut() {
+    firebaseAuth.signOut();
+  }
+  
+  listenToSignInEvents = (user) => {
+    console.log(user);
+    if (user) {
+      this.setState({name: user.displayName});
     }
-
-    render() {
-        return (
-            <div>
-                <button onClick={this.onSignIn}>Sign in with Google</button>
-                <button onClick={this.onSignOut}>Sign out</button>
-                <h3>{this.state.name}</h3>
-                <img src={this.state.avatar} alt="user icon"/>
-            </div>
-        );
+    else {
+      this.setState({name: "Username"});
     }
-
-    onSignIn() {
-        firebaseAuth.signIn();
-    }
-
-    onSignOut() {
-        firebaseAuth.signOut();
-    }
-
-    componentDidMount() {
-        // emitter[SignIn].Receive --> 🐣
-        dataModel.eventEmitter.on(EVENTS.SIGN_IN, (user) => {
-            console.log(user);
-            if (user) {
-                this.setState({name: user.displayName});
-            } else {
-                this.setState({name: "Username"});
-            }
-        });
-    }
+  }
+  
+  componentDidMount() {
+    // emitter[SignIn].Receive --> 🐣
+    dataModel.eventEmitter.addListener(EVENTS.SIGN_IN, this.listenToSignInEvents);
+  }
+  
+  componentWillUnmount() {
+    // Remember to remove the listener when this component is destroyed.
+    dataModel.eventEmitter.removeListener(EVENTS.SIGN_IN, this.listenToSignInEvents)
+  }
 }
 
 export default Auth;

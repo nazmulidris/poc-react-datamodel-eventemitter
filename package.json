@@ -8,7 +8,7 @@
     "start": "webpack-dev-server --open"
   },
   "author": "Nazmul Idris",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "dependencies": {
     "react": "^16.8.3",
     "react-dom": "^16.8.3"

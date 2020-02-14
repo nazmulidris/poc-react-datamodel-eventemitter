@@ -53,6 +53,10 @@ class FirebaseAuth {
             dataModel.setUser(null);
         });
     }
+    
+    init() {
+        console.log("🏁 dataModel has been created");
+    }
 }
 
 const firebaseAuth = new FirebaseAuth();

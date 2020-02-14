@@ -55,6 +55,10 @@ class DataModel {
         this.data = data;
         localStorage.setItem(DATA_KEY, JSON.stringify(data));
     }
+    
+    init() {
+        console.log("🏁 dataModel has been created");
+    }
 }
 
 const dataModel = new DataModel();

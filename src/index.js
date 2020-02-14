@@ -20,6 +20,6 @@ import "./index.css";
 import App    from "./components/App";
 import {init} from "./context/LoadContext";
 
-init();
+initializeContext();
 
 render(<App/>, document.getElementById("app"));

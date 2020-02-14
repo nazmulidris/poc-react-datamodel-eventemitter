@@ -31,26 +31,16 @@ class Auth extends React.Component {
   render() {
     return (
         <div>
-          <button onClick={this.onSignIn}>Sign in with Google</button>
-          <button onClick={this.onSignOut}>Sign out</button>
+          <button onClick={firebaseAuth.signIn}>Sign in with Google</button>
+          <button onClick={firebaseAuth.signOut}>Sign out</button>
           <h3>{this.state.name}</h3>
           <img className="avatar" src={this.state.avatar} alt="user icon"/>
         </div>
     );
   }
   
-  onSignIn = () => {
-    firebaseAuth.signIn();
-  };
-  
-  onSignOut = () => {
-    firebaseAuth.signOut();
-  };
-  
-  
-  listenToSignInEvents = (user) => {
-    console.log(user);
-    console.log("Component mounted and now displaying user name or not :)");
+  handleSignInEvent = (user) => {
+    console.log(JSON.stringify(user, null, 2));
     if (user) {
       this.setState({name: user.displayName, avatar: user.photoURL});
     }
@@ -61,12 +51,12 @@ class Auth extends React.Component {
   
   componentDidMount() {
     // emitter[SignIn].Receive --> 🐣
-    dataModel.eventEmitter.addListener(EVENTS.SIGN_IN, this.listenToSignInEvents);
+    dataModel.eventEmitter.addListener(EVENTS.SIGN_IN, this.handleSignInEvent);
   }
   
   componentWillUnmount() {
     // Remember to remove the listener when this component is destroyed.
-    dataModel.eventEmitter.removeListener(EVENTS.SIGN_IN, this.listenToSignInEvents)
+    dataModel.eventEmitter.removeListener(EVENTS.SIGN_IN, this.handleSignInEvent)
   }
 }
 

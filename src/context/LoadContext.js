@@ -21,9 +21,9 @@ import {dataModel}    from "./DataModel";
  * Explicitly imports these dependencies in the order defined below at the
  * very start of the app.
  */
-const init = () => {
-  dataModel.init();
-  firebaseAuth.init();
-};
+const initializeContext = () => {
+  dataModel.init()
+  firebaseAuth.init()
+}
 
-export {init}
+export {initializeContext}

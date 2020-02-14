@@ -37,33 +37,43 @@ class FirebaseAuth {
   
   signIn = () => {
     const authProvider = new firebase.auth.GoogleAuthProvider();
-    this.firebaseAuth
-        .signInWithPopup(authProvider)
-        .then((result) => {
-          const {uid, displayName, photoURL, email} = result.user;
-          const userObject                          = {uid, displayName, photoURL, email};
-          console.log(`${userObject.displayName} signed In`);
-          // Could we save data directly to localStorage here instead of
-            // using dataModel to do it?
-          dataModel.setUser(userObject);
-        });
+    this.firebaseAuth.signInWithPopup(authProvider).then(()=>{
+      console.log("Signed in!");
+    });
   };
   
   signOut = () => {
-    console.log("Signed out!");
-    this.firebaseAuth.signOut()
-        .then(() => {
-          dataModel.setUser(null);
-        });
+    this.firebaseAuth.signOut().then(()=>{
+      console.log("Signed out!");
+    });
+  }
+  
+  handleSignIn = (user) => {
+    const {uid, displayName, photoURL, email} = user;
+    const userObject                          = {uid, displayName, photoURL, email};
+    console.log(JSON.stringify(userObject, null, 2));
+    dataModel.setUser(userObject);
   };
   
-  init = () => {
-    console.log("🏁 firebaseAuth has been created");
-    
-    // this.firebaseAuth.onAuthStateChanged((user) => {
-    //     console.log("🏁 Firebase auth state changed!");
-    // })
+  handleSignOut = () => {
+    dataModel.setUser(null);
   };
+  
+  init = ()=> {
+    this.firebaseAuth.onAuthStateChanged((user) => {
+      if (user) {
+        console.log("🐥", user.displayName, "has signed in!")
+        this.handleSignIn(user);
+      }
+      else {
+        console.log("🥚User has signed out!")
+        this.handleSignOut();
+      }
+    })
+    
+    console.log("🏁 firebaseAuth has been created");
+  }
+  
 }
 
 const firebaseAuth = new FirebaseAuth();

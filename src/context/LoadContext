@@ -22,8 +22,8 @@ import {dataModel}    from "./DataModel";
  * very start of the app.
  */
 const init = () => {
-  dataModel.init()
-  firebaseAuth.init()
-}
+  dataModel.init();
+  firebaseAuth.init();
+};
 
 export {init}

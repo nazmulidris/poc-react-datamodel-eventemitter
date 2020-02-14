@@ -35,33 +35,35 @@ class FirebaseAuth {
     this.firebaseAuth = firebase.auth(this.firebaseApp);
   }
   
-  signIn() {
+  signIn = () => {
     const authProvider = new firebase.auth.GoogleAuthProvider();
     this.firebaseAuth
         .signInWithPopup(authProvider)
         .then((result) => {
           const {uid, displayName, photoURL, email} = result.user;
           const userObject                          = {uid, displayName, photoURL, email};
-          console.log(userObject);
+          console.log(`${userObject.displayName} signed In`);
+          // Could we save data directly to localStorage here instead of
+            // using dataModel to do it?
           dataModel.setUser(userObject);
         });
   };
   
-  signOut() {
+  signOut = () => {
     console.log("Signed out!");
     this.firebaseAuth.signOut()
         .then(() => {
           dataModel.setUser(null);
         });
-  }
+  };
   
-  init() {
+  init = () => {
     console.log("🏁 firebaseAuth has been created");
     
-    this.firebaseAuth.onAuthStateChanged((user) => {
-    
-    })
-  }
+    // this.firebaseAuth.onAuthStateChanged((user) => {
+    //     console.log("🏁 Firebase auth state changed!");
+    // })
+  };
 }
 
 const firebaseAuth = new FirebaseAuth();

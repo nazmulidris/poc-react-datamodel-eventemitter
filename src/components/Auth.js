@@ -34,28 +34,30 @@ class Auth extends React.Component {
           <button onClick={this.onSignIn}>Sign in with Google</button>
           <button onClick={this.onSignOut}>Sign out</button>
           <h3>{this.state.name}</h3>
-          <img src={this.state.avatar} alt="user icon"/>
+          <img className="avatar" src={this.state.avatar} alt="user icon"/>
         </div>
     );
   }
   
-  onSignIn() {
+  onSignIn = () => {
     firebaseAuth.signIn();
-  }
+  };
   
-  onSignOut() {
+  onSignOut = () => {
     firebaseAuth.signOut();
-  }
+  };
+  
   
   listenToSignInEvents = (user) => {
     console.log(user);
+    console.log("Component mounted and now displaying user name or not :)");
     if (user) {
-      this.setState({name: user.displayName});
+      this.setState({name: user.displayName, avatar: user.photoURL});
     }
     else {
       this.setState({name: "Username"});
     }
-  }
+  };
   
   componentDidMount() {
     // emitter[SignIn].Receive --> 🐣

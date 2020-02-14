@@ -17,3 +17,9 @@
 body {
   background: lightblue;
 }
+
+.avatar {
+  width: 100px;
+  height: 100px;
+  clip-path: circle();
+}

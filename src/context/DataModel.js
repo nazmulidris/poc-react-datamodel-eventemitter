@@ -24,6 +24,9 @@ class DataModel {
         this.data = (dataString) ? JSON.parse(dataString) : {};
         const userString = localStorage.getItem(USER_KEY);
         this.user = (userString) ? JSON.parse(userString) : {};
+
+        const EventEmitter = require('events');
+        this.eventEmitter = new EventEmitter();
     }
 
     getUser() {
@@ -35,13 +38,14 @@ class DataModel {
     }
 
     // Save user object to localStorage from memory.
-    setUser(user){
+    setUser(user) {
         this.user = user;
         localStorage.setItem(USER_KEY, JSON.stringify(user));
+        this.eventEmitter.emit('signIn', user);
     }
 
     // Save data object to localStorage from memory.
-    setData(data){
+    setData(data) {
         this.data = data;
         localStorage.setItem(DATA_KEY, JSON.stringify(data));
     }

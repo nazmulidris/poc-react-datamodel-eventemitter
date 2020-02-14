@@ -13,9 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 import firebase from "firebase";
 import {dataModel} from "./DataModel";
 
+/**
+ * Firebase documentation on Auth: https://firebase.google.com/docs/reference/js/firebase.auth.Auth
+ */
 class FirebaseAuth {
     constructor() {
         const config = {
@@ -36,8 +40,8 @@ class FirebaseAuth {
         this.firebaseAuth
             .signInWithPopup(authProvider)
             .then((result) => {
-                const { uid, displayName, photoURL, email } = result.user;
-                const userObject = { uid, displayName, photoURL, email };
+                const {uid, displayName, photoURL, email} = result.user;
+                const userObject = {uid, displayName, photoURL, email};
                 console.log(userObject);
                 dataModel.setUser(userObject);
             });
@@ -45,7 +49,9 @@ class FirebaseAuth {
 
     signOut() {
         console.log("Signed out!🐣");
-        this.firebaseAuth.signOut();
+        this.firebaseAuth.signOut().then(() => {
+            dataModel.setUser(null);
+        });
     }
 }
 

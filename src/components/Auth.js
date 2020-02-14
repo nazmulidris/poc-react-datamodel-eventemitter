@@ -17,15 +17,24 @@
 import React from "react";
 import AvatarIcon from '../images/avatar.svg';
 import {firebaseAuth} from "../context/FirebaseAuth";
+import {dataModel} from "../context/DataModel";
 
 class Auth extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            name: "Username",
+            avatar: AvatarIcon
+        };
+    }
+
     render() {
         return (
             <div>
                 <button onClick={this.onSignIn}>Sign in with Google</button>
                 <button onClick={this.onSignOut}>Sign out</button>
-                <h3>Username</h3>
-                <img src={AvatarIcon} alt="user icon"/>
+                <h3>{this.state.name}</h3>
+                <img src={this.state.avatar} alt="user icon"/>
             </div>
         );
     }
@@ -36,6 +45,17 @@ class Auth extends React.Component {
 
     onSignOut() {
         firebaseAuth.signOut();
+    }
+
+    componentDidMount() {
+        dataModel.eventEmitter.on('signIn', (user) => {
+            console.log(user);
+            if (user) {
+                this.setState({name: user.displayName});
+            } else {
+                this.setState({name: "Username"});
+            }
+        });
     }
 }
 

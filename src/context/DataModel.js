@@ -17,6 +17,11 @@
 const DATA_KEY = "data";
 const USER_KEY = "user";
 
+const EVENTS = {
+    SIGN_IN: "SIGN_IN",
+    SIGN_OUT: "SIGN_OUT"
+};
+
 class DataModel {
     // Copy data & user objects from localStorage to memory.
     constructor() {
@@ -41,7 +46,8 @@ class DataModel {
     setUser(user) {
         this.user = user;
         localStorage.setItem(USER_KEY, JSON.stringify(user));
-        this.eventEmitter.emit('signIn', user);
+        // Send --> 🐣
+        this.eventEmitter.emit(EVENTS.SIGN_IN, user);
     }
 
     // Save data object to localStorage from memory.
@@ -53,4 +59,4 @@ class DataModel {
 
 const dataModel = new DataModel();
 
-export {dataModel}
+export {dataModel, EVENTS}

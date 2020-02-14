@@ -17,7 +17,7 @@
 import React from "react";
 import AvatarIcon from '../images/avatar.svg';
 import {firebaseAuth} from "../context/FirebaseAuth";
-import {dataModel} from "../context/DataModel";
+import {dataModel, EVENTS} from "../context/DataModel";
 
 class Auth extends React.Component {
     constructor(props) {
@@ -47,8 +47,9 @@ class Auth extends React.Component {
         firebaseAuth.signOut();
     }
 
+    // Receive --> 🐣
     componentDidMount() {
-        dataModel.eventEmitter.on('signIn', (user) => {
+        dataModel.eventEmitter.on(EVENTS.SIGN_IN, (user) => {
             console.log(user);
             if (user) {
                 this.setState({name: user.displayName});

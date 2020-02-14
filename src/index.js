@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-import React from "react";
+import React    from "react";
 import {render} from "react-dom";
 import "./index.css";
-import App from "./components/App";
-import {init} from "./context/LoadContext";
+import App      from "./components/App";
+import {init}   from "./context/LoadContext";
 
 init();
 

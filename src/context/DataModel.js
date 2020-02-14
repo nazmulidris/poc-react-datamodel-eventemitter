@@ -18,47 +18,47 @@ const DATA_KEY = "data";
 const USER_KEY = "user";
 
 const EVENTS = {
-    SIGN_IN: "SIGN_IN",
-    SIGN_OUT: "SIGN_OUT"
+  SIGN_IN : "SIGN_IN",
+  SIGN_OUT: "SIGN_OUT"
 };
 
 class DataModel {
-    // Copy data & user objects from localStorage to memory.
-    constructor() {
-        const dataString = localStorage.getItem(DATA_KEY);
-        this.data = (dataString) ? JSON.parse(dataString) : {};
-        const userString = localStorage.getItem(USER_KEY);
-        this.user = (userString) ? JSON.parse(userString) : {};
-
-        const EventEmitter = require('events');
-        this.eventEmitter = new EventEmitter();
-    }
-
-    getUser() {
-        return this.user;
-    }
-
-    getData() {
-        return this.data;
-    }
-
-    // Save user object to localStorage from memory.
-    setUser(user) {
-        this.user = user;
-        localStorage.setItem(USER_KEY, JSON.stringify(user));
-        // emitter[SignIn].Send --> 🐣
-        this.eventEmitter.emit(EVENTS.SIGN_IN, user);
-    }
-
-    // Save data object to localStorage from memory.
-    setData(data) {
-        this.data = data;
-        localStorage.setItem(DATA_KEY, JSON.stringify(data));
-    }
+  // Copy data & user objects from localStorage to memory.
+  constructor() {
+    const dataString = localStorage.getItem(DATA_KEY);
+    this.data        = (dataString) ? JSON.parse(dataString) : {};
+    const userString = localStorage.getItem(USER_KEY);
+    this.user        = (userString) ? JSON.parse(userString) : {};
     
-    init() {
-        console.log("🏁 dataModel has been created");
-    }
+    const EventEmitter = require('events');
+    this.eventEmitter  = new EventEmitter();
+  }
+  
+  getUser() {
+    return this.user;
+  }
+  
+  getData() {
+    return this.data;
+  }
+  
+  // Save user object to localStorage from memory.
+  setUser(user) {
+    this.user = user;
+    localStorage.setItem(USER_KEY, JSON.stringify(user));
+    // emitter[SignIn].Send --> 🐣
+    this.eventEmitter.emit(EVENTS.SIGN_IN, user);
+  }
+  
+  // Save data object to localStorage from memory.
+  setData(data) {
+    this.data = data;
+    localStorage.setItem(DATA_KEY, JSON.stringify(data));
+  }
+  
+  init() {
+    console.log("🏁 dataModel has been created");
+  }
 }
 
 const dataModel = new DataModel();

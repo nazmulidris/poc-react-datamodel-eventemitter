@@ -14,51 +14,54 @@
  * limitations under the License.
  */
 
-import firebase from "firebase";
+import firebase    from "firebase";
 import {dataModel} from "./DataModel";
 
 /**
  * Firebase documentation on Auth: https://firebase.google.com/docs/reference/js/firebase.auth.Auth
  */
 class FirebaseAuth {
-    constructor() {
-        const config = {
-            apiKey: "AIzaSyBiGQI2Z0jh7cYTn8yawY9tMZZTdnMLo7w",
-            authDomain: "poc-react-datamodel-events.firebaseapp.com",
-            databaseURL: "https://poc-react-datamodel-events.firebaseio.com",
-            projectId: "poc-react-datamodel-events",
-            storageBucket: "poc-react-datamodel-events.appspot.com",
-            messagingSenderId: "97985664561",
-            appId: "1:97985664561:web:00b004b7d37599f00b2710"
-        };
-        this.firebaseApp = firebase.initializeApp(config);
-        this.firebaseAuth = firebase.auth(this.firebaseApp);
-    }
-
-    signIn() {
-        const authProvider = new firebase.auth.GoogleAuthProvider();
-        this.firebaseAuth
-            .signInWithPopup(authProvider)
-            .then((result) => {
-                const {uid, displayName, photoURL, email} = result.user;
-                const userObject = {uid, displayName, photoURL, email};
-                console.log(userObject);
-                dataModel.setUser(userObject);
-            });
+  constructor() {
+    const config      = {
+      apiKey           : "AIzaSyBiGQI2Z0jh7cYTn8yawY9tMZZTdnMLo7w",
+      authDomain       : "poc-react-datamodel-events.firebaseapp.com",
+      databaseURL      : "https://poc-react-datamodel-events.firebaseio.com",
+      projectId        : "poc-react-datamodel-events",
+      storageBucket    : "poc-react-datamodel-events.appspot.com",
+      messagingSenderId: "97985664561",
+      appId            : "1:97985664561:web:00b004b7d37599f00b2710"
     };
-
-    signOut() {
-        console.log("Signed out!");
-        this.firebaseAuth.signOut().then(() => {
-            dataModel.setUser(null);
+    this.firebaseApp  = firebase.initializeApp(config);
+    this.firebaseAuth = firebase.auth(this.firebaseApp);
+  }
+  
+  signIn() {
+    const authProvider = new firebase.auth.GoogleAuthProvider();
+    this.firebaseAuth
+        .signInWithPopup(authProvider)
+        .then((result) => {
+          const {uid, displayName, photoURL, email} = result.user;
+          const userObject                          = {uid, displayName, photoURL, email};
+          console.log(userObject);
+          dataModel.setUser(userObject);
         });
-    }
+  };
+  
+  signOut() {
+    console.log("Signed out!");
+    this.firebaseAuth.signOut()
+        .then(() => {
+          dataModel.setUser(null);
+        });
+  }
+  
+  init() {
+    console.log("🏁 firebaseAuth has been created");
     
-    init() {
-        console.log("🏁 firebaseAuth has been created");
-        
-        
-    }
+    this.firebaseAuth.onAuthStateChanged((user) => {
+    
+    })
+  }
 }
 
 const firebaseAuth = new FirebaseAuth();

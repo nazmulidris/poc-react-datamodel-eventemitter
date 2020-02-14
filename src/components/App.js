@@ -15,17 +15,17 @@
  */
 
 import React from "react";
-import Auth from "./Auth";
+import Auth  from "./Auth";
 
 class App extends React.Component {
-    render() {
-        return (
-            <div>
-                <h1>Hello World</h1>
-                <Auth/>
-            </div>
-        );
-    }
+  render() {
+    return (
+        <div>
+          <h1>Hello World</h1>
+          <Auth/>
+        </div>
+    );
+  }
 }
 
 export default App;

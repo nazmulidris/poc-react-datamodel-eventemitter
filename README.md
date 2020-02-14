@@ -1,1 +1,4 @@
-Copied from this [tutorial](https://medium.com/javascript-in-plain-english/create-a-react-application-from-the-scracth-using-webpack-babel-and-react-79a7913c8f61)
+# References
+
+1. Copied from this [tutorial](https://tinyurl.com/sgrm2lq)
+2. Event emitters and other patterns [tutorial](https://tinyurl.com/uh9evav)

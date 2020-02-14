@@ -14,14 +14,18 @@
  * limitations under the License.
  */
 
-import React from "react";
-import { render } from "react-dom";
+import React      from "react";
+import {render}   from "react-dom";
 import "./index.css";
+import AvatarIcon from './images/avatar.svg';
 
 class App extends React.Component {
   render() {
     return (
-      <div>Hello World</div>
+        <div>
+          <img src={AvatarIcon} alt="user icon"/>
+          Hello World
+        </div>
     );
   }
 }

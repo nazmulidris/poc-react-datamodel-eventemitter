@@ -48,6 +48,7 @@ class DataModel {
     localStorage.setItem(USER_KEY, JSON.stringify(user));
     // emitter[SignIn].Send --> 🐣
     this.eventEmitter.emit(EVENTS.SIGN_IN, user);
+  }
   
   // Save data object to localStorage from memory.
   setData = data => {
@@ -55,6 +56,12 @@ class DataModel {
     localStorage.setItem(DATA_KEY, JSON.stringify(data));
   
     console.log("🏁 dataModel has been created");
+  }
+  
+  init = () => {
+    console.log("🏁 dataModel has been created");
+  }
+  
 }
 
 const dataModel = new DataModel();

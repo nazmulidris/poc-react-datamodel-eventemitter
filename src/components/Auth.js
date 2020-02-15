@@ -45,7 +45,7 @@ class Auth extends React.Component {
       this.setState({name: user.displayName, avatar: user.photoURL});
     }
     else {
-      this.setState({name: "Username"});
+      this.setState({name: "Username", avatar: AvatarIcon});
     }
   };
   

@@ -1,0 +1,30 @@
+[
+  {
+    "life goals list": [
+      {
+        "item": "become empowered",
+        "done": true,
+        "date": "2020-02-12"
+      },
+      {
+        "item": "be happy",
+        "done": false,
+        "date": "2020-02-12"
+      }
+    ]
+  },
+  {
+    "work todo list": [
+      {
+        "item": "write code",
+        "done": true,
+        "date": "2020-02-12"
+      },
+      {
+        "item": "make profit",
+        "done": false,
+        "date": "2020-02-12"
+      }
+    ]
+  }
+]

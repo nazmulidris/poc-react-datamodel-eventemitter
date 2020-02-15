@@ -17,12 +17,18 @@
 import React from "react";
 import Auth  from "./Auth";
 
+import myData   from "../data/data.json";
+import DumpObject from "./DumpObject";
+
+console.log(myData);
+
 class App extends React.Component {
   render() {
     return (
         <div>
           <h1>Hello World</h1>
           <Auth/>
+          <DumpObject arg={myData} />
         </div>
     );
   }

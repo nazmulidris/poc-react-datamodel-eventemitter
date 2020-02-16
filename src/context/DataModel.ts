@@ -14,24 +14,30 @@
  * limitations under the License.
  */
 
+import {UserObjectType} from "./FirebaseAuth";
+import {EventEmitter} from "events";
+
 const DATA_KEY = "data";
 const USER_KEY = "user";
 
 const EVENTS = {
-  SIGN_IN : "SIGN_IN",
+  SIGN_IN: "SIGN_IN",
   SIGN_OUT: "SIGN_OUT"
 };
 
 class DataModel {
-  // Copy data & user objects from localStorage to memory.
+  public data: {};
+  public user: UserObjectType;
+  public eventEmitter: EventEmitter;
+  
   constructor() {
     const dataString = localStorage.getItem(DATA_KEY);
-    this.data        = (dataString) ? JSON.parse(dataString) : {};
+    this.data = (dataString) ? JSON.parse(dataString) : {};
     const userString = localStorage.getItem(USER_KEY);
-    this.user        = (userString) ? JSON.parse(userString) : {};
+    this.user = (userString) ? JSON.parse(userString) : {};
     
     const EventEmitter = require('events');
-    this.eventEmitter  = new EventEmitter();
+    this.eventEmitter = new EventEmitter();
   }
   
   getUser = () => {
@@ -43,7 +49,7 @@ class DataModel {
   }
   
   // Save user object to localStorage from memory.
-  setUser = user => {
+  setUser = (user: UserObjectType): void => {
     this.user = user;
     localStorage.setItem(USER_KEY, JSON.stringify(user));
     // emitter[SignIn].Send --> 🐣
@@ -51,10 +57,10 @@ class DataModel {
   }
   
   // Save data object to localStorage from memory.
-  setData = data => {
+  setData = (data: {}): void => {
     this.data = data;
     localStorage.setItem(DATA_KEY, JSON.stringify(data));
-  
+    
     console.log("🏁 dataModel has been created");
   }
   

@@ -14,16 +14,24 @@
  * limitations under the License.
  */
 
-import React               from "react";
-import AvatarIcon          from '../images/avatar.svg';
-import {firebaseAuth}      from "../context/FirebaseAuth";
+import * as React from "react";
+// @ts-ignore
+import AvatarIcon from '../images/avatar.svg';
+import {firebaseAuth, UserObjectType} from "../context/FirebaseAuth";
 import {dataModel, EVENTS} from "../context/DataModel";
+import {HelloPropsType} from "./Hello";
+import "../index.css";
 
-class Auth extends React.Component {
-  constructor(props) {
+interface AuthStateType {
+  name: string
+  avatar: string
+}
+
+class Auth extends React.Component<{}, AuthStateType> {
+  constructor(props:{}) {
     super(props);
     this.state = {
-      name  : "Username",
+      name: "Username",
       avatar: AvatarIcon
     };
   }
@@ -39,7 +47,7 @@ class Auth extends React.Component {
     );
   }
   
-  handleSignInEvent = (user) => {
+  handleSignInEvent = (user: UserObjectType): void => {
     console.log(JSON.stringify(user, null, 2));
     if (user) {
       this.setState({name: user.displayName, avatar: user.photoURL});
@@ -60,4 +68,4 @@ class Auth extends React.Component {
   }
 }
 
-export default Auth;
+export {Auth};

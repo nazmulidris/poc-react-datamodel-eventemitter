@@ -14,35 +14,43 @@
  * limitations under the License.
  */
 
-const path              = require('path');
+const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = () => ({
-  entry    : './src/index.js',
-  output   : {
-    path    : path.resolve(__dirname, 'dist'),
+  entry: './src/index.tsx',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
     filename: 'index_bundle.js'
   },
-  module   : {
+  resolve: {
+    extensions: [".js", ".jsx", ".ts", ".tsx"],
+  },
+  module: {
     rules: [
-      {test: /\.(js)$/, use: 'babel-loader'},
+      // TypeScript support.
+      {test: /\.ts(x?)$/, exclude: /node_modules/, use: [{loader: "ts-loader"}]},
+      // All output '.js' files will have any sourcemaps re-processed by
+      // 'source-map-loader'.
+      {enforce: "pre", test: /\.js$/, loader: "source-map-loader"},
+      {test: /\.(js)$/, exclude: /node_modules/, use: 'babel-loader'},
       {test: /\.css$/, use: ["style-loader", "css-loader"]},
       {test: /\.(jpg|png|svg)$/, use: 'url-loader'},
     ]
   },
-  mode     : 'development',
-  devtool  : 'source-map',
+  mode: 'development',
+  devtool: 'source-map',
   devServer: {
-    contentBase       : path.join(__dirname, 'dist'),
-    publicPath        : 'http://localhost:8000/',
-    compress          : true,
-    port              : 8000,
-    hot               : true,
+    contentBase: path.join(__dirname, 'dist'),
+    publicPath: 'http://localhost:8000/',
+    compress: true,
+    port: 8000,
+    hot: true,
     historyApiFallback: true
   },
-  plugins  : [
+  plugins: [
     new HtmlWebpackPlugin({
-                            template: 'src/index.html'
-                          })
+      template: 'src/index.html'
+    })
   ]
 })

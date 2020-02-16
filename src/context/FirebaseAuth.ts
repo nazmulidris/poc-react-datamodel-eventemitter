@@ -14,43 +14,52 @@
  * limitations under the License.
  */
 
-import firebase    from "firebase";
+import firebase from "firebase";
 import {dataModel} from "./DataModel";
 
 /**
  * Firebase documentation on Auth: https://firebase.google.com/docs/reference/js/firebase.auth.Auth
  */
 class FirebaseAuth {
+  private firebaseApp: firebase.app.App;
+  private firebaseAuth: firebase.auth.Auth;
+  
   constructor() {
-    const config      = {
-      apiKey           : "AIzaSyBiGQI2Z0jh7cYTn8yawY9tMZZTdnMLo7w",
-      authDomain       : "poc-react-datamodel-events.firebaseapp.com",
-      databaseURL      : "https://poc-react-datamodel-events.firebaseio.com",
-      projectId        : "poc-react-datamodel-events",
-      storageBucket    : "poc-react-datamodel-events.appspot.com",
+    const config = {
+      apiKey: "AIzaSyBiGQI2Z0jh7cYTn8yawY9tMZZTdnMLo7w",
+      authDomain: "poc-react-datamodel-events.firebaseapp.com",
+      databaseURL: "https://poc-react-datamodel-events.firebaseio.com",
+      projectId: "poc-react-datamodel-events",
+      storageBucket: "poc-react-datamodel-events.appspot.com",
       messagingSenderId: "97985664561",
-      appId            : "1:97985664561:web:00b004b7d37599f00b2710"
+      appId: "1:97985664561:web:00b004b7d37599f00b2710"
     };
-    this.firebaseApp  = firebase.initializeApp(config);
+    this.firebaseApp = firebase.initializeApp(config);
     this.firebaseAuth = firebase.auth(this.firebaseApp);
   }
   
   signIn = () => {
     const authProvider = new firebase.auth.GoogleAuthProvider();
-    this.firebaseAuth.signInWithPopup(authProvider).then(()=>{
-      console.log("Signed in!");
-    });
+    this.firebaseAuth.signInWithPopup(authProvider)
+        .then(() => {
+          console.log("Signed in!");
+        });
   };
   
   signOut = () => {
-    this.firebaseAuth.signOut().then(()=>{
-      console.log("Signed out!");
-    });
+    this.firebaseAuth.signOut()
+        .then(() => {
+          console.log("Signed out!");
+        });
   }
   
-  handleSignIn = (user) => {
-    const {uid, displayName, photoURL, email} = user;
-    const userObject                          = {uid, displayName, photoURL, email};
+  handleSignIn = (user: UserObjectType) => {
+    const userObject: UserObjectType = {
+      uid: user.uid,
+      displayName: user.displayName,
+      photoURL: user.photoURL,
+      email: user.email
+    }
     console.log(JSON.stringify(userObject, null, 2));
     dataModel.setUser(userObject);
   };
@@ -59,7 +68,7 @@ class FirebaseAuth {
     dataModel.setUser(null);
   };
   
-  init = ()=> {
+  init = () => {
     this.firebaseAuth.onAuthStateChanged((user) => {
       if (user) {
         console.log("🐥", user.displayName, "has signed in!")
@@ -76,6 +85,13 @@ class FirebaseAuth {
   
 }
 
+interface UserObjectType {
+  uid: string;
+  displayName: string;
+  photoURL: string;
+  email: string;
+}
+
 const firebaseAuth = new FirebaseAuth();
 
-export {firebaseAuth};
+export {firebaseAuth, UserObjectType};

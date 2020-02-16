@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Maret Idris. All rights reserved.
+ * Copyright 2020 Nazmul Idris. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,24 +14,21 @@
  * limitations under the License.
  */
 
-import React from "react";
-import Auth  from "./Auth";
+import * as React from "react";
 
-import myData   from "../data/data.json";
-import DumpObject from "./DumpObject";
+interface HelloPropsType {
+  arg1: string;
+  arg2: string;
+}
 
-console.log(myData);
-
-class App extends React.Component {
+/**
+ * 'HelloProps' describes the shape of props. State is never set so we use the
+ * '{}' type.
+ */
+class Hello extends React.Component<HelloPropsType, {}> {
   render() {
-    return (
-        <div>
-          <h1>Hello World</h1>
-          <Auth/>
-          <DumpObject arg={myData} />
-        </div>
-    );
+    return <h1>Hello from {this.props.arg1} and {this.props.arg2}!</h1>;
   }
 }
 
-export default App;
+export {HelloPropsType, Hello}

@@ -14,12 +14,8 @@
  * limitations under the License.
  */
 
-import React    from "react";
-import {render} from "react-dom";
-import "./index.css";
-import App    from "./components/App";
-import {initializeContext} from "./context/LoadContext";
-
-initializeContext();
-
-render(<App/>, document.getElementById("app"));
+// https://stackoverflow.com/a/45887328/2085356
+declare module "*.svg" {
+  const content: string;
+  export default content;
+}

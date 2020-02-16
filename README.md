@@ -1,3 +1,12 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [References](#references)
+- [Firebase Auth](#firebase-auth)
+- [Conversion to TypeScript](#conversion-to-typescript)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # References
 
 1. Copied from this [tutorial](https://tinyurl.com/sgrm2lq)
@@ -68,3 +77,25 @@ signIn = () => {
 And the
 [Firebase API reference on Auth](https://firebase.google.com/docs/reference/js/firebase.auth.Auth)
 are sparse at best, and misleading at worst.
+
+# Conversion to TypeScript
+
+The [following tutorial](https://www.typescriptlang.org/docs/handbook/react-&-webpack.html)
+is a great reference to follow to convert JS projects that use React to TS projects.
+
+One of the biggest changes is that the import statements are all different. For TS and
+React, they look like the following now.
+
+```typescript
+import * as React from "react";
+import * as myData from "../data/data.json";
+```
+
+Here are some more references that helped along the way.
+
+1. [SO discussion on react import statements](https://stackoverflow.com/a/57741687/2085356)
+2. [Tutorial on React.Component types](https://fettblog.eu/typescript-react/components/)
+3. [SO discussion on how to import SVG files](https://stackoverflow.com/a/45887328/2085356)
+4. [Tutorial on importing JSON files](https://mariusschulz.com/blog/importing-json-modules-in-typescript)
+5. [Tutorial on TS arrow functions](https://www.tutorialsteacher.com/typescript/arrow-function)
+6. [TypeScript in 5 minutes](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
